@@ -135,7 +135,7 @@ Once a `put` statement has been emitted from the `node index.js` terminal you ca
 ```bash
 $ sudo kill 8248 
 ```
-Killing the command directly in the terminal running the script will cause the script to exit and not return.
+Killing the command directly in the terminal running the DTrace script will cause the script to exit and not return any output.
 The terminal running the dtrace command will return something like 
 
 ```
@@ -148,7 +148,7 @@ Well done you can now dtrace leveldb.
 
 ## Measuring Latency
 
-Now we can count put commands we should look at how to count the execution time. 
+Now we can count put commands we should look at how to quantify the execution time. 
 
 With `node index.js` still running execute latency-put.d 
 
