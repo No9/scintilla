@@ -16,11 +16,17 @@ $ npm install
 
 To start we are going to inspect the put command and count how many times it is called by a node program.
 
-To find the the right `put` command first we need to inspect the library 
+To find the the right `put` command first we need to inspect the library.
+
+The following bash commands should be executed from the root of scintilla. 
 
 ```bash
 $ nm node_modules/level/node_modules/leveldown/build/Release/leveldown.node | grep Put
+```
 
+This command inspects the binary and filters for entries that contain `Put`
+
+```
 0000000000063fb0 T _ZN7leveldb10PutFixed32EPSsj
 0000000000063fe0 T _ZN7leveldb10PutFixed64EPSsm
 0000000000059d20 T _ZN7leveldb10WriteBatch3PutERKNS_5SliceES3_
@@ -35,11 +41,15 @@ $ nm node_modules/level/node_modules/leveldown/build/Release/leveldown.node | gr
 0000000000034700 T _ZN9leveldown8Database3PutERKN2v89ArgumentsE
 ```
 
-There are a number of candidates there so lets see it unmangled
+There are a number of candidates there so lets see it unmangled using the `-C` option. 
 
 ```bash
 $ nm -C node_modules/level/node_modules/leveldown/build/Release/leveldown.node | grep Put
+```
 
+Now we can see the cleaned output
+
+```
 0000000000063fb0 T leveldb::PutFixed32(std::string*, unsigned int)
 0000000000063fe0 T leveldb::PutFixed64(std::string*, unsigned long)
 0000000000059d20 T leveldb::WriteBatch::Put(leveldb::Slice const&, leveldb::Slice const&)
