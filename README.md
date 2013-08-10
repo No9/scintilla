@@ -118,8 +118,8 @@ $ node index.js
 Then in a new terminal run the dtrace script and pipe the output to c++filt for pretty printing.
 
 ```bash
-$ sudo dtrace -s ./puttrace.d `pgrep node` | c++filt
-dtrace: script './puttrace.d' matched 2 probes
+$ sudo dtrace -s ./count-put.d `pgrep node` | c++filt
+dtrace: script './count-put.d' matched 2 probes
 ```
 
 In a third terminal find the name of the process that is running dtrace 
