@@ -17,3 +17,8 @@ pid$1::_ZN7leveldb10WriteBatch3PutERKNS_5SliceES3_:entry
  
   printf("\n Value:%s", stringof(copyin((uintptr_t)((Argument_a*)this->val_ptr_arg)->data_, (uintptr_t)((Argument_a*)this->val_ptr_arg)->size_)));
 }
+
+pid$1::_ZN7leveldb6DBImpl3GetERKNS_11ReadOptionsERKNS_5SliceEPSs:entry
+{
+  this->key_ptr = arg2;
+}

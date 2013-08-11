@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+var fs = require('fs')
+var path = require('path')
+var argv = require('optimist')
+    .usage('\nUsage: scintilla -pid XXXX (scintilla needs to run with root privileges)')
+    .demand(['pid'])
+    .describe('pid', 'Process Id of the node application hosting leveldb')
+    .argv
+

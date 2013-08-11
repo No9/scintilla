@@ -1,8 +1,9 @@
 {
   "name": "scintilla",
-  "version": "0.0.0",
-  "description": "An example of using dtrace with level",
-  "main": "index.js",
+  "version": "0.1.0",
+  "bin" : "./scintilla",
+  "description": "An commandline tool for monitoring leveldb with DTrace",
+  "main": "scintilla",
   "scripts": {
     "test": "tests/test.js"
   },
@@ -21,7 +22,16 @@
   "bugs": {
     "url": "https://github.com/No9/scintilla/issues"
   },
+  "preferGlobal": true,
+  "readmeFilename": "README.md",
   "dependencies": {
-    "level": "~0.12.0"
-  }
+    "level": "~0.12.0",
+    "optimist": "~0.6.0"
+  }i,
+ "devDependencies": {
+   "tap": "~0.4.3"
+ },
+ "scripts" : {
+   "test": "./tests/test"
+ }
 }
