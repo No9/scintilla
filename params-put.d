@@ -2,36 +2,18 @@
 
 typedef struct Argument
 {
-  void *ptr;
-}
-
-pid$1::_ZN9leveldown8Database13PutToDatabaseEPN7leveldb12WriteOptionsENS1_5SliceES4_:entry
+  char *data_; 
+  size_t  size_;
+}Argument_a;
+pid$1::_ZN7leveldb10WriteBatch3PutERKNS_5SliceES3_:entry
 {
- trace(arg1)
-  this->ptr = arg0;
-/*
-#include <node.h>
-#include <node_buffer.h>
-*/
-/* this->hints = ( const v8::Arguments *) copyin(arg2, sizeof (const v8::Arguments))
-  printf("%s \n", copyinstr(arg0))
+  this->key_ptr = arg1;
+  this->key_ptr_arg=(Argument_a*)copyin(this->key_ptr, sizeof(Argument_a));
+  
+  printf("\n Key:  %s", stringof(copyin((uintptr_t)((Argument_a*)this->key_ptr_arg)->data_, (uintptr_t)((Argument_a*)this->key_ptr_arg)->size_)));
 
-  printf("%s : %s : %s : %s: %s: %s: %s  \n", copyinstr(arg0))
-  , copyinstr(arg1)
-  , copyinstr(arg2)
-  , copyinstr(arg3)
-  , copyinstr(arg4)
-  , copyinstr(arg5)
-  , copyinstr(arg6)
-  );
-  trace(arg0);
-  trace(arg1); 
-  trace(arg2);
-  trace(arg3); 
-  trace(arg4);
-*/
+  this->val_ptr = arg2;
+  this->val_ptr_arg=(Argument_a*)copyin(this->val_ptr, sizeof(Argument_a));
+ 
+  printf("\n Value:%s", stringof(copyin((uintptr_t)((Argument_a*)this->val_ptr_arg)->data_, (uintptr_t)((Argument_a*)this->val_ptr_arg)->size_)));
 }
-END
-{
-}
-
