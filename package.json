@@ -27,11 +27,11 @@
   "dependencies": {
     "level": "~0.12.0",
     "optimist": "~0.6.0"
-  }i,
+  },
  "devDependencies": {
    "tap": "~0.4.3"
  },
  "scripts" : {
-   "test": "./tests/test"
+   "test": "node ./tests/test.js"
  }
 }
