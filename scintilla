@@ -3,8 +3,21 @@
 var fs = require('fs')
 var path = require('path')
 var argv = require('optimist')
-    .usage('\nUsage: scintilla -pid XXXX (scintilla needs to run with root privileges)')
-    .demand(['pid'])
-    .describe('pid', 'Process Id of the node application hosting leveldb')
+    .usage('\nUsage: scintilla [options] (scintilla needs to run with root privileges)')
+    .check(function(){ if (process.argv.length == 2) return false })
+    .alias('p', 'pid')
+    .describe('p', 'Process Id of the node application hosting leveldb')
+    .alias('l', 'list')
+    .describe('l', 'list the pids for all the running node processes')
+    .alias('a', 'all')
+    .describe('a', 'Try and attach to all node processes. If new ones are created while running then scintilla will attach')
     .argv
 
+
+if(argv.l){
+ console.log('Collecting node processes');
+ // run pgrep node
+ // for each line in pgrep node 
+ // run ps -p 11880 -o args
+ // run pwdx 11880
+} 
