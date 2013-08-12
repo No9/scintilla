@@ -14,10 +14,23 @@ var argv = require('optimist')
     .argv
 
 
-if(argv.l){
+if(argv.l) {
  console.log('Collecting node processes');
  // run pgrep node
  // for each line in pgrep node 
  // run ps -p 11880 -o args
  // run pwdx 11880
+}
+
+if(arg.a) {
+  //run pgrep node
+  //for each process
+  //add to process array 
+  //Try and run script for process
+  //setInterval and try and run script against new ones. 
 } 
+
+if(arg.p) {
+  // Call the script with the pid provided
+  // sudo dtrace -s ./scintilla.d arg.p | c++filt
+}
