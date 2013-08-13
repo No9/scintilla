@@ -4,7 +4,7 @@ var fs = require('fs')
 var path = require('path')
 var argv = require('optimist')
     .usage('\nUsage: scintilla [options] (scintilla needs to run with root privileges)')
-    .check(function(){ if (process.argv.length == 2) return false })
+    .check(function(){ if (process.argv.length === 2) { return false } })
     .alias('p', 'pid')
     .describe('p', 'Process Id of the node application hosting leveldb')
     .alias('l', 'list')
@@ -13,24 +13,84 @@ var argv = require('optimist')
     .describe('a', 'Try and attach to all node processes. If new ones are created while running then scintilla will attach')
     .argv
 
+var spawn = require('child_process').spawn
+
+var procsmon = {}
 
 if(argv.l) {
- console.log('Collecting node processes');
- // run pgrep node
- // for each line in pgrep node 
- // run ps -p 11880 -o args
- // run pwdx 11880
+
+   console.log('Running node processes')
+   var grep_cp = spawn(__dirname + '/list.sh', [])
+    
+   grep_cp.stderr.on('data', function(data) {
+      console.log('error ' + data);
+   })
+
+   var msg = "";
+   grep_cp.stdout.on('data', function(data) {
+        var sd = data.toString()
+        if(sd.indexOf(":") > -1) {
+           msg += " " + sd.trim()
+        }else {
+          console.log(msg + " " + sd.trim())
+          msg = ""
+       }
+   })
+
+   grep_cp.on('exit', function(data) {
+        
+   })
 }
 
-if(arg.a) {
-  //run pgrep node
+if(argv.a) {
+   
+   console.log('monitor all')
+   setInterval(function() {  
+   var grep_cp = spawn('pgrep', ['node'])
+    
+   grep_cp.stderr.on('data', function(data) {
+      console.log('error ' + data);
+   })
+
+   grep_cp.stdout.on('data', function(data) {
+      var pids = data.toString().split('\n')
+      for(var i = 0; i < pids.length; i++) {
+         var pid = pids[i].trim();
+         if((pid != process.pid) && (pid != "") && (procsmon[pid] === undefined)) {
+            procsmon[pid] = pid
+            traceProcess(pid)
+         }
+      }
+   })
+
+   grep_cp.on('exit', function(data) {
+        
+   })
+   }, 200)
+   //run pgrep node
   //for each process
   //add to process array 
   //Try and run script for process
   //setInterval and try and run script against new ones. 
-} 
+}
 
-if(arg.p) {
-  // Call the script with the pid provided
-  // sudo dtrace -s ./scintilla.d arg.p | c++filt
+if(argv.p) {
+   console.log('Monitoring single pid')
+   traceProcess(argv.p)
+}
+
+function traceProcess(pid) {
+    console.log("Attaching pid : " +  pid)
+    var node_cp = spawn('dtrace', ['-Cs', './scintilla.d', pid])
+
+    node_cp.stderr.on('data', function(data) { 
+       
+       if(data.toString().trim() != "")
+          console.log('Attach output : ', data.toString())
+             
+       })
+
+       node_cp.stdout.on('data', function(data) {
+          console.log(data.toString())
+       })
 }
