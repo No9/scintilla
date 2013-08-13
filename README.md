@@ -20,7 +20,7 @@ $ npm install scintilla -g
 
 ## Usage 
 
-As root 
+As root (or sudo) 
 
 To list available processes 
 
@@ -57,15 +57,31 @@ Attach output :  script
 Attach output :   '
 Attach output :  ./scintilla.d
 Attach output :  ' matched 
-Attach output :  2
+Attach output :  3
 Attach output :   probe
 Attach output :  s
 
 CPU     ID                    FUNCTION:NAME
-  0  63960 _ZN7leveldb10WriteBatch3PutERKNS_5SliceES3_:entry 
+  0  63970 _ZN7leveldb10WriteBatch3PutERKNS_5SliceES3_:entry 
 
 PUT
  Key:  name
- Value:[object Object]
+  0  63973 _ZN7leveldb6DBImpl3GetERKNS_11ReadOptionsERKNS_5SliceEPSs:entry 
+************** END ***************
 
+
+GET
+Key:  name
+************** END ***************
+
+
+  0  63972 _ZN7leveldb10WriteBatch6DeleteERKNS_5SliceE:entry 
+
+DEL
+ Key:  name
+************** END ***************
 ```
+
+## Notes 
+
+Currently only supports key string monitoring. 
