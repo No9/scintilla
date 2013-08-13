@@ -24,13 +24,13 @@ As root (or sudo)
 
 To list available processes 
 
-```bash
+```
 # scintilla -l
 ```
 
 To monitor a process 
 
-```bash 
+``` 
 # scintilla -p XXXX
 ```
 or
@@ -45,6 +45,7 @@ To try and monitor all currently running processes and any new processes.
 
 ```bash
 # scintilla -a
+``` 
 
 ## Output
 
