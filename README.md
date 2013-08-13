@@ -41,11 +41,14 @@ $ sudo scintilla -pid XXXX
 
 Where XXXX is the process id of the node application hosting leveldb. 
 
-To try and monitor all currently running processes and any new processes.
+To monitor all currently running node processes and any new processes that are started.
 
-```bash
+```
 # scintilla -a
 ``` 
+
+Any node processes found that do not have a leveldb instance will display an warning message
+
 
 ## Output
 
