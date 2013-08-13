@@ -52,6 +52,20 @@ Any node processes found that do not have a leveldb instance will display a warn
 
 ## Output
 
+From the repo directory run 
+
+```bash
+$ node tests/mock.js
+```
+
+Then from another console
+
+```
+& sudo scintilla -a 
+```
+
+Will produce the following output
+
 ```
 monitor all
 Attaching pid : 11880
