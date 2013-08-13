@@ -47,7 +47,7 @@ To monitor all currently running node processes and any new processes that are s
 # scintilla -a
 ``` 
 
-Any node processes found that do not have a leveldb instance will display an warning message
+Any node processes found that do not have a leveldb instance will display a warning message
 
 
 ## Output
